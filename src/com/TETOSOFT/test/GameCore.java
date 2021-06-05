@@ -15,24 +15,24 @@ import com.TETOSOFT.graphics.ScreenManager;
  */
 public abstract class GameCore {
 
-    protected static final int FONT_SIZE = 18;
+	protected static final int FONT_SIZE = 18;
 
-    private static final DisplayMode POSSIBLE_MODES[] = {
-        new DisplayMode(800, 600, 32, 0),
-        new DisplayMode(800, 600, 16, 0),
-        new DisplayMode(800, 600, 24, 0),
-        new DisplayMode(640, 480, 16, 0),
-        new DisplayMode(640, 480, 32, 0),
-        new DisplayMode(640, 480, 24, 0),
-        new DisplayMode(1024, 768, 16, 0),
-        new DisplayMode(1024, 768, 32, 0),
-        new DisplayMode(1024, 768, 24, 0),
-    };
+//	private static final DisplayMode POSSIBLE_MODES[] = {
+//			new DisplayMode(800, 600, 32, 0),
+//			new DisplayMode(800, 600, 16, 0),
+//			new DisplayMode(800, 600, 24, 0),
+//			new DisplayMode(640, 480, 16, 0),
+//			new DisplayMode(640, 480, 32, 0),
+//			new DisplayMode(640, 480, 24, 0),
+//			new DisplayMode(1024, 768, 16, 0),
+//			new DisplayMode(1024, 768, 32, 0),
+//			new DisplayMode(1024, 768, 24, 0),
+//	};
 
-    private boolean isRunning;
-    protected ScreenManager screen;
+	private boolean isRunning;
 	private boolean isPause;
 	protected boolean hasDied;
+	protected ScreenManager screen;
 
 
 	/**
@@ -95,18 +95,18 @@ public abstract class GameCore {
 
 	/**
         Sets full screen mode and initiates and objects.
-    */
-    public void init() 
-    {
-        screen = new ScreenManager();
-        DisplayMode displayMode =
-        screen.findFirstCompatibleMode(POSSIBLE_MODES);
-        screen.setFullScreen(displayMode);
+	 */
+	public void init() 
+	{
+		screen = new ScreenManager();
+//		DisplayMode displayMode =
+//				screen.findFirstCompatibleMode(POSSIBLE_MODES);
+		screen.init();
 
-        Window window = screen.getFullScreenWindow();
-        window.setFont(new Font("Dialog", Font.PLAIN, FONT_SIZE));
-        window.setBackground(Color.BLACK);
-        window.setForeground(Color.WHITE);
+		Window window = screen.getWindow();
+		window.setFont(new Font("Dialog", Font.PLAIN, FONT_SIZE));
+		window.setBackground(Color.BLACK);
+		window.setForeground(Color.WHITE);
 
 		isRunning = true;
 		isPause = false;

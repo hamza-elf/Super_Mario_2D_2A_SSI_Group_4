@@ -242,7 +242,7 @@ public class GameEngine extends GameCore
         
         // update player
         updateCreature(player, elapsedTime);
-        player.update(elapsedTime);
+        player.update2(elapsedTime);
         
         // update other sprites
         Iterator i = map.getSprites();
@@ -387,9 +387,15 @@ public class GameEngine extends GameCore
             
         } else if (powerUp instanceof PowerUp.Goal) {
             // advance to next map      
-      
+        	
+          
+            stop(true); // pause the game
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
             map = mapLoader.loadNextMap();
-            
         }
     }
     

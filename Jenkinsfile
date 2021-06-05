@@ -10,22 +10,25 @@
                 //bat "mvn clean -f TestJenkins"
             }
         }
-        stage('install') {
+        /*stage('install') {
             steps {
                // bat "mvn install -f TestJenkins"
                   bat "mvn install" 
             }
         }
+        */
         stage('test') {
             steps {
                 //bat "mvn test -f TestJenkins"
                bat "mvn test"
+               bat " cd Super_Mario_2D_2A_SSI_Group_4/src/com/TETOSOFT/tilegame
+               bat " javac GameEngine.java "
             }
         }
         stage('package') {
             steps {
                 //bat "mvn package -f TestJenkins"
-                bat "mvn package"
+                //bat "mvn package"
             }
         }
     }

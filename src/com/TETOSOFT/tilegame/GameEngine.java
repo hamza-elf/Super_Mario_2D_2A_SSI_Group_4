@@ -31,7 +31,7 @@ public class GameEngine extends GameCore
     private GameAction moveLeft;
     private GameAction moveRight;
     private GameAction jump;
-    private GameAction exit;
+    private GameAction esc;
     private int collectedStars=0;
     private int numLives=6;
    
@@ -74,15 +74,15 @@ public class GameEngine extends GameCore
         inputManager.mapToKey(moveLeft, KeyEvent.VK_LEFT);
         inputManager.mapToKey(moveRight, KeyEvent.VK_RIGHT);
         inputManager.mapToKey(jump, KeyEvent.VK_SPACE);
-        inputManager.mapToKey(exit, KeyEvent.VK_ESCAPE);
+        inputManager.mapToKey(esc, KeyEvent.VK_ESCAPE);
     }
     
     
     private void checkInput(long elapsedTime) 
     {
         
-        if (exit.isPressed()) {
-            stop();
+        if (esc.isPressed()) {
+            stop(true); //esc = true meaning that esc is pressed to be passed to the exit function
         }
         
         Player player = (Player)map.getPlayer();
@@ -101,6 +101,7 @@ public class GameEngine extends GameCore
                 player.update(elapsedTime);
             }
             if (jump.isPressed()) {
+            	stop(false);	//esc = false to signal that space was pressed
                 player.jump(false);
             }
             player.setVelocityX(velocityX);

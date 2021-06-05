@@ -57,9 +57,8 @@ public class GameEngine extends GameCore
     /**
      * Closes any resurces used by the GameManager.
      */
-    public void stop() {
-        super.stop();
-        
+    public void stop(boolean esc) {
+        super.stop(esc);
     }
     
     
@@ -67,7 +66,7 @@ public class GameEngine extends GameCore
         moveLeft = new GameAction("moveLeft");
         moveRight = new GameAction("moveRight");
         jump = new GameAction("jump", GameAction.DETECT_INITAL_PRESS_ONLY);
-        exit = new GameAction("exit",GameAction.DETECT_INITAL_PRESS_ONLY);
+        esc = new GameAction("exit",GameAction.DETECT_INITAL_PRESS_ONLY);
         
         inputManager = new InputManager(screen.getFullScreenWindow());
         inputManager.setCursor(InputManager.INVISIBLE_CURSOR);
@@ -93,9 +92,13 @@ public class GameEngine extends GameCore
             if (moveLeft.isPressed()) 
             {
                 velocityX-=player.getMaxSpeed();
+
+                player.update(elapsedTime);
             }
             if (moveRight.isPressed()) {
                 velocityX+=player.getMaxSpeed();
+
+                player.update(elapsedTime);
             }
             if (jump.isPressed()) {
                 player.jump(false);

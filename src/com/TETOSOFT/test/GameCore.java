@@ -110,6 +110,7 @@ public abstract class GameCore {
 
 		isRunning = true;
 		isPause = false;
+		hasDied = false;
 	}
 
 

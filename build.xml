@@ -50,9 +50,6 @@
     <target name="unit-tests" depends="test-compile">
         <mkdir dir="build/reports"/>
         <junit printsummary="yes" haltonfailure="no">
-            <!-- Make sure these two libraries are included -->
-            <classpath location="lib/junit-4.11.jar" />
-            <classpath location="lib/hamcrest-core-1.3.jar" />
             <classpath>
                 <pathelement path="${junit_path}"/>
                 <pathelement path="build/tests"/>

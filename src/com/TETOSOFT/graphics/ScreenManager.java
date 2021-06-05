@@ -44,57 +44,45 @@ public class ScreenManager
     }
 
     
-    public DisplayMode getCurrentDisplayMode() 
-    {
-        return device.getDisplayMode();
-    }
+//    public DisplayMode getCurrentDisplayMode() 
+//    {
+//        return device.getDisplayMode();
+//    }
+//
+//    public boolean displayModesMatch(DisplayMode mode1,DisplayMode mode2)
+//    {
+//        if (mode1.getWidth() != mode2.getWidth() || mode1.getHeight() != mode2.getHeight())
+//        {
+//            return false;
+//        }
+//
+//        if (mode1.getBitDepth() != DisplayMode.BIT_DEPTH_MULTI &&
+//            mode2.getBitDepth() != DisplayMode.BIT_DEPTH_MULTI &&
+//            mode1.getBitDepth() != mode2.getBitDepth())
+//        {
+//            return false;
+//        }
+//
+//        if (mode1.getRefreshRate() !=
+//            DisplayMode.REFRESH_RATE_UNKNOWN &&
+//            mode2.getRefreshRate() !=
+//            DisplayMode.REFRESH_RATE_UNKNOWN &&
+//            mode1.getRefreshRate() != mode2.getRefreshRate())
+//         {
+//             return false;
+//         }
+//
+//         return true;
+//    }
 
-    public boolean displayModesMatch(DisplayMode mode1,DisplayMode mode2)
-    {
-        if (mode1.getWidth() != mode2.getWidth() || mode1.getHeight() != mode2.getHeight())
-        {
-            return false;
-        }
 
-        if (mode1.getBitDepth() != DisplayMode.BIT_DEPTH_MULTI &&
-            mode2.getBitDepth() != DisplayMode.BIT_DEPTH_MULTI &&
-            mode1.getBitDepth() != mode2.getBitDepth())
-        {
-            return false;
-        }
-
-        if (mode1.getRefreshRate() !=
-            DisplayMode.REFRESH_RATE_UNKNOWN &&
-            mode2.getRefreshRate() !=
-            DisplayMode.REFRESH_RATE_UNKNOWN &&
-            mode1.getRefreshRate() != mode2.getRefreshRate())
-         {
-             return false;
-         }
-
-         return true;
-    }
-
-
-    public void setFullScreen(DisplayMode displayMode) 
-    {
-        final JFrame frame = new JFrame();
+    public void init(){
+    	frame.setSize(new Dimension(800, 650));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setUndecorated(true);
         frame.setIgnoreRepaint(true);
         frame.setResizable(false);
-
-        device.setFullScreenWindow(frame);
-
-        if (displayMode != null && device.isDisplayChangeSupported())
-        {
-            try {
-                device.setDisplayMode(displayMode);
-            }
-            catch (IllegalArgumentException ex) { }
-
-            frame.setSize(displayMode.getWidth(), displayMode.getHeight());
-        }
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
         
         try {
             EventQueue.invokeAndWait(new Runnable() 
@@ -104,17 +92,7 @@ public class ScreenManager
                     frame.createBufferStrategy(2);
                 }
             });
-        }
-        catch (InterruptedException ex) 
-        {
-            // ignore
-        }
-        catch (InvocationTargetException  ex) 
-        {
-            // ignore
-        }
-
-
+        }catch (Exception ex) {}
     }
 
     

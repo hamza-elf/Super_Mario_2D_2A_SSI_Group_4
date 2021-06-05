@@ -8,8 +8,8 @@ import javax.swing.JFrame;
 
 public class ScreenManager 
 {
-    private GraphicsDevice device;
-
+    //private GraphicsDevice device;
+    private final JFrame frame; 
    
     public ScreenManager() 
     {

@@ -1,6 +1,10 @@
 package com.TETOSOFT.test;
 
 import java.awt.*;
+import java.awt.font.TextAttribute;
+import java.text.AttributedCharacterIterator;
+import java.text.AttributedString;
+
 import javax.swing.ImageIcon;
 
 import com.TETOSOFT.graphics.ScreenManager;
@@ -8,7 +12,7 @@ import com.TETOSOFT.graphics.ScreenManager;
 /**
     Simple abstract class used for testing. Subclasses should
     implement the draw() method.
-*/
+ */
 public abstract class GameCore {
 
     protected static final int FONT_SIZE = 18;
@@ -30,15 +34,26 @@ public abstract class GameCore {
 	private boolean isPause;
 
 
-    /**
+	/**
         Signals the game loop that it's time to quit
-    */
-    public void stop() {
-        isRunning = false;
-    }
+	 */
+	public void stop(boolean esc) {
+		if(esc) {
+			if(isPause) { 
+				isPause = false;
+				hasDied = false; //if game is paused and esc is pressed then the game was restarted
+			}
+			else isPause = true;
+		}
+		else 	//space pressed
+			if(isPause) {
+				isPause = false;
+				isRunning = false; //exit the game
+			}
+	}
 
 
-    /**
+	/**
         Calls init() and gameLoop()
     */
     public void run() {
@@ -92,8 +107,9 @@ public abstract class GameCore {
         window.setBackground(Color.BLACK);
         window.setForeground(Color.WHITE);
 
-        isRunning = true;
-    }
+		isRunning = true;
+		isPause = false;
+	}
 
 
     public Image loadImage(String fileName) {
@@ -131,18 +147,36 @@ public abstract class GameCore {
     }
 
 
-    /**
+	/**
         Updates the state of the game/animation based on the
         amount of elapsed time that has passed.
-    */
-    public void update(long elapsedTime) {
-        // do nothing
-    }
+	 */
+	public void update(long elapsedTime) {
+		// do nothing
+	}
 
 
-    /**
+	/**
         Draws to the screen. Subclasses must override this
         method.
     */
     public abstract void draw(Graphics2D g);
+	public void drawPause(Graphics2D g) {
+		AttributedString styledText1 = null;
+	        
+	        styledText1 = new AttributedString("Press ESC to Restart the Game");
+		
+        styledText1.addAttribute(TextAttribute.FAMILY, "serif");
+        styledText1.addAttribute(TextAttribute.SIZE, 50);
+        styledText1.addAttribute(TextAttribute.FOREGROUND, Color.yellow);        
+        AttributedCharacterIterator i1 = styledText1.getIterator();
+        AttributedString styledText2 = new AttributedString("Or Press SPACE to Exit !");
+        styledText2.addAttribute(TextAttribute.FAMILY, "serif");
+        styledText2.addAttribute(TextAttribute.SIZE, 50);
+        styledText2.addAttribute(TextAttribute.FOREGROUND, Color.yellow);        
+        AttributedCharacterIterator i2 = styledText2.getIterator();
+        g.drawString(i1, 80.0f,270.0f);
+        g.drawString(i2, 130.0f,350.0f);
+        
+	}
 }

@@ -2,6 +2,9 @@ package com.TETOSOFT.tilegame;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.font.TextAttribute;
+import java.text.AttributedCharacterIterator;
+import java.text.AttributedString;
 import java.util.Iterator;
 
 import com.TETOSOFT.graphics.*;
@@ -43,7 +46,7 @@ public class GameEngine extends GameCore
         initInput();
         
         // start resource manager
-        mapLoader = new MapLoader(screen.getFullScreenWindow().getGraphicsConfiguration());
+        mapLoader = new MapLoader(screen.getWindow().getGraphicsConfiguration());
         
         // load resources
         drawer = new TileMapDrawer();
@@ -75,7 +78,7 @@ public class GameEngine extends GameCore
         jump = new GameAction("jump", GameAction.DETECT_INITAL_PRESS_ONLY);
         esc = new GameAction("exit",GameAction.DETECT_INITAL_PRESS_ONLY);
         
-        inputManager = new InputManager(screen.getFullScreenWindow());
+        inputManager = new InputManager(screen.getWindow());
         inputManager.setCursor(InputManager.INVISIBLE_CURSOR);
         
         inputManager.mapToKey(moveLeft, KeyEvent.VK_LEFT);
@@ -121,15 +124,16 @@ public class GameEngine extends GameCore
         
         drawer.draw(g, map, screen.getWidth(), screen.getHeight());
         g.setColor(Color.WHITE);
-        g.drawString("Press ESC for EXIT.",10.0f,20.0f);
+        g.drawString("Press ESC to PAUSE the game.",10.0f,50.0f);
         g.setColor(Color.GREEN);
-        g.drawString("Coins: "+collectedStars,300.0f,20.0f);
+        g.drawString("Coins: "+collectedStars,300.0f,50.0f);
         g.setColor(Color.YELLOW);
-        g.drawString("Lives: "+(numLives),500.0f,20.0f );
+        g.drawString("Lives: "+(numLives),500.0f,50.0f );
         g.setColor(Color.WHITE);
-        g.drawString("Home: "+mapLoader.currentMap,700.0f,20.0f);
+        g.drawString("Home: "+mapLoader.currentMap,700.0f,50.0f);
         
     }
+    
     
     
     /**

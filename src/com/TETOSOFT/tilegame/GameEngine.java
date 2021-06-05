@@ -50,7 +50,14 @@ public class GameEngine extends GameCore
         drawer.setBackground(mapLoader.loadImage("background.jpg"));
         
         // load first map
-        map = mapLoader.loadNextMap();
+        map = mapLoader.loadFirstMap();
+    }
+    public void restart() {
+    	collectedStars=0;
+        numLives=6;
+    	map = mapLoader.loadFirstMap();
+    	this.hasDied=true;
+    	stop(true);
     }
     
     

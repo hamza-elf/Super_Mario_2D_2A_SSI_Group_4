@@ -172,5 +172,34 @@ public abstract class Creature extends Sprite {
             setState(STATE_DEAD);
         }
     }
+    
+    public void update2(long elapsedTime) {
+        // select the correct Animation
+        Animation newAnim = anim;
+        if (getVelocityX() < 0) {
+            newAnim = left;
+        }
+        else if (getVelocityX() > 0) {
+            newAnim = right;
+        }
+        if (state == STATE_DYING && newAnim == left) {
+            newAnim = deadLeft;
+        }
+        else if (state == STATE_DYING && newAnim == right) {
+            newAnim = deadRight;
+        }
+
+        // update the Animation
+        if (anim != newAnim) {
+            anim = newAnim;
+            anim.start();
+        }
+        
+        // update to "dead" state
+        stateTime += elapsedTime;
+        if (state == STATE_DYING && stateTime >= DIE_TIME) {
+            setState(STATE_DEAD);
+        }
+    }
 
 }

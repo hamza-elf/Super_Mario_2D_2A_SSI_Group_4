@@ -361,11 +361,11 @@ public class GameEngine extends GameCore
                 numLives--;
                 if(numLives==0) {
                     try {
-                        Thread.sleep(3000);
+                        Thread.sleep(1000);
                     } catch (InterruptedException ex) {
                         ex.printStackTrace();
                     }
-                    stop();
+                    restart(); //restart
                 }
             }
         }

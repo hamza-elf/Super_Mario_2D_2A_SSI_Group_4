@@ -32,6 +32,7 @@ public abstract class GameCore {
     private boolean isRunning;
     protected ScreenManager screen;
 	private boolean isPause;
+	protected boolean hasDied;
 
 
 	/**

@@ -55,44 +55,44 @@ public abstract class GameCore {
 
 	/**
         Calls init() and gameLoop()
-    */
-    public void run() {
-        try {
-            init();
-            gameLoop();
-        }
-        finally {
-            screen.restoreScreen();
-            lazilyExit();
-        }
-    }
+	 */
+	public void run() {
+		try {
+			init();
+			gameLoop();
+		}
+		finally {
+			screen.restoreScreen();
+			lazilyExit();
+		}
+	}
 
 
-    /**
+	/**
         Exits the VM from a daemon thread. The daemon thread waits
         2 seconds then calls System.exit(0). Since the VM should
         exit when only daemon threads are running, this makes sure
         System.exit(0) is only called if neccesary. It's neccesary
         if the Java Sound system is running.
-    */
-    public void lazilyExit() {
-        Thread thread = new Thread() {
-            public void run() {
-                // first, wait for the VM exit on its own.
-                try {
-                    Thread.sleep(2000);
-                }
-                catch (InterruptedException ex) { }
-                // system is still running, so force an exit
-                System.exit(0);
-            }
-        };
-        thread.setDaemon(true);
-        thread.start();
-    }
+	 */
+	public void lazilyExit() {
+		Thread thread = new Thread() {
+			public void run() {
+				// first, wait for the VM exit on its own.
+				try {
+					Thread.sleep(2000);
+				}
+				catch (InterruptedException ex) { }
+				// system is still running, so force an exit
+				System.exit(0);
+			}
+		};
+		thread.setDaemon(true);
+		thread.start();
+	}
 
 
-    /**
+	/**
         Sets full screen mode and initiates and objects.
     */
     public void init() 
@@ -112,39 +112,48 @@ public abstract class GameCore {
 	}
 
 
-    public Image loadImage(String fileName) {
-        return new ImageIcon(fileName).getImage();
-    }
+	public Image loadImage(String fileName) {
+		return new ImageIcon(fileName).getImage();
+	}
 
 
-    /**
+	/**
         Runs through the game loop until stop() is called.
-    */
-    public void gameLoop() {
-        long startTime = System.currentTimeMillis();
-        long currTime = startTime;
+	 */
+	public void gameLoop() {
+		long startTime = System.currentTimeMillis();
+		long currTime = startTime;
 
-        while (isRunning) {
-            long elapsedTime =
-                System.currentTimeMillis() - currTime;
-            currTime += elapsedTime;
+		while (isRunning) {
+			long elapsedTime =
+					System.currentTimeMillis() - currTime;
+			currTime += elapsedTime;
 
-            // update
-            update(elapsedTime);
+			// update
+			update(elapsedTime);
 
-            // draw the screen
-            Graphics2D g = screen.getGraphics();
-            draw(g);
-            g.dispose();
-            screen.update();
+			// draw the screen
+			Graphics2D g = screen.getGraphics();
+			draw(g);
+			g.dispose();
+			screen.update();
 
-            // don't take a nap! run as fast as possible
-            /*try {
+			while(isPause) {				
+				currTime = System.currentTimeMillis(); //time moves on but nothing gets updated
+				update(0);
+				Graphics2D g1 = screen.getGraphics();
+				drawPause(g1);
+				g1.dispose();
+				screen.update();
+			}
+
+			// don't take a nap! run as fast as possible
+			/*try {
                 Thread.sleep(20);
             }
             catch (InterruptedException ex) { }*/
-        }
-    }
+		}
+	}
 
 
 	/**

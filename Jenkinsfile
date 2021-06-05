@@ -1,5 +1,5 @@
 
-/* pipeline {
+ pipeline {
     agent any
     stages {
         stage('git repo & clean') {
@@ -26,14 +26,4 @@
         }
     }
 }
-*/
-node{
-  stage('SCM Checkout'){
-  git 'https://github.com/hamza-elf/Super_Mario_2D_2A_SSI_Group_4'
-  }
-  stage('Compile-Package'){
- // def mvnHome = tool name: '', type: 'maven'
-    def mvnHome = tool 'Default'
- // sh "${mvnHome}/bin/mvn package"
-  }
-}
+

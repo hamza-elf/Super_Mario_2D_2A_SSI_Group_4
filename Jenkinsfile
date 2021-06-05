@@ -2,19 +2,19 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Building phase') {
             steps {
                 withAnt(installation:'ant'){
                     bat 'ant compile'
                 }
             }
         }
-        stage('Test') {
+        stage('Testing phase') {
             steps {
                 bat 'ant unit-tests'
             }
         }
-        stage('Package') {
+        stage('Packaging phase') {
             steps {
                 bat 'ant package'
             }

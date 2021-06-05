@@ -2,8 +2,8 @@ package com.TETOSOFT.graphics;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
-import java.lang.reflect.InvocationTargetException;
+//import java.awt.image.BufferedImage;
+//import java.lang.reflect.InvocationTargetException;
 import javax.swing.JFrame;
 
 public class ScreenManager 
@@ -18,30 +18,29 @@ public class ScreenManager
     	frame = new JFrame("2A SSI Groupe 4 : SUPER MARIO GAME");
     }
 
-
     
-    public DisplayMode[] getCompatibleDisplayModes() 
-    {
-        return device.getDisplayModes();
-    }
+//    public DisplayMode[] getCompatibleDisplayModes() 
+//    {
+//        return device.getDisplayModes();
+//    }
 
 
    
-    public DisplayMode findFirstCompatibleMode(DisplayMode modes[])
-    {
-        DisplayMode goodModes[] = device.getDisplayModes();
-        for (int i = 0; i < modes.length; i++) 
-        {
-            for (int j = 0; j < goodModes.length; j++) 
-            {
-                if (displayModesMatch(modes[i], goodModes[j])) 
-                {
-                    return modes[i];
-                }
-            }
-        }
-        return null;
-    }
+//    public DisplayMode findFirstCompatibleMode(DisplayMode modes[])
+//    {
+//        DisplayMode goodModes[] = device.getDisplayModes();
+//        for (int i = 0; i < modes.length; i++) 
+//        {
+//            for (int j = 0; j < goodModes.length; j++) 
+//            {
+//                if (displayModesMatch(modes[i], goodModes[j])) 
+//                {
+//                    return modes[i];
+//                }
+//            }
+//        }
+//        return null;
+//    }
 
     
 //    public DisplayMode getCurrentDisplayMode() 
@@ -98,92 +97,100 @@ public class ScreenManager
     
     public Graphics2D getGraphics() 
     {
-        Window window = device.getFullScreenWindow();
-        if (window != null) 
-        {
-            BufferStrategy strategy = window.getBufferStrategy();
-            return (Graphics2D)strategy.getDrawGraphics();
-        }
-     
-           
-        return null;
-        
+//    	  Window window = device.getFullScreenWindow();
+//        if (window != null) 
+//        {
+//            BufferStrategy strategy = window.getBufferStrategy();
+//            return (Graphics2D)strategy.getDrawGraphics();
+//        }           
+//        return null;     
+    	BufferStrategy strategy = frame.getBufferStrategy();
+    	return (Graphics2D)strategy.getDrawGraphics();
     }
     
    
-    public void update() 
-    {
-        Window window = device.getFullScreenWindow();
-        if (window != null) 
-        {
-            BufferStrategy strategy = window.getBufferStrategy();
-            if (!strategy.contentsLost()) 
-            {
-                strategy.show();
-            }
-        }
-        
-        Toolkit.getDefaultToolkit().sync();
+    public void update(){
+//        Window window = device.getFullScreenWindow();
+//        if (window != null) 
+//        {
+//            BufferStrategy strategy = window.getBufferStrategy();
+//            if (!strategy.contentsLost()) 
+//            {
+//                strategy.show();
+//            }
+//        }
+//        
+//        Toolkit.getDefaultToolkit().sync();
+    	BufferStrategy strategy = frame.getBufferStrategy();
+    	if (!strategy.contentsLost()){
+    		strategy.show();
+    	}
+    	Toolkit.getDefaultToolkit().sync();
     }
 
 
 
-    public JFrame getFullScreenWindow() {
-        return (JFrame)device.getFullScreenWindow();
+    public JFrame getWindow() {
+//        return (JFrame)device.getFullScreenWindow();
+    	return frame;
     }
 
 
    
     public int getWidth() 
     {
-        Window window = device.getFullScreenWindow();
-        if (window != null) 
-        {
-            return window.getWidth();
-        }
-        else 
-        {
-            return 0;
-        }
+//        Window window = device.getFullScreenWindow();
+//        if (window != null) 
+//        {
+//            return window.getWidth();
+//        }
+//        else 
+//        {
+//            return 0;
+//        }
+    	 return frame.getWidth();
     }
 
 
     
     public int getHeight() 
     {
-        Window window = device.getFullScreenWindow();
-        if (window != null) 
-        {
-            return window.getHeight();
-        }
-        else 
-        {
-            return 0;
-        }
+//        Window window = device.getFullScreenWindow();
+//        if (window != null) 
+//        {
+//            return window.getHeight();
+//        }
+//        else 
+//        {
+//            return 0;
+//        }
+    	return frame.getHeight();
     }
 
 
     
     public void restoreScreen() 
     {
-        Window window = device.getFullScreenWindow();
-        if (window != null) 
-        {
-            window.dispose();
-        }
-        device.setFullScreenWindow(null);
+        //Window window = device.getFullScreenWindow();
+//        if (window != null) 
+//        {
+//            window.dispose();
+//        }
+//        device.setFullScreenWindow(null);
+    	frame.dispose();
     }
 
 
-    public BufferedImage createCompatibleImage(int w, int h,
-        int transparancy)
-    {
-        Window window = device.getFullScreenWindow();
-        if (window != null) {
-            GraphicsConfiguration gc =
-                window.getGraphicsConfiguration();
-            return gc.createCompatibleImage(w, h, transparancy);
-        }
-        return null;
-    }
+//    public BufferedImage createCompatibleImage(int w, int h,
+//        int transparancy)
+//    {
+////        Window window = device.getFullScreenWindow();
+//    	Window window = frame;
+//        if (window != null) {
+//            GraphicsConfiguration gc =
+//                window.getGraphicsConfiguration();
+//            return gc.createCompatibleImage(w, h, transparancy);
+//        }
+//        return null;
+//    }
 }

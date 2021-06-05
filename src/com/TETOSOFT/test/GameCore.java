@@ -170,12 +170,21 @@ public abstract class GameCore {
 	/**
         Draws to the screen. Subclasses must override this
         method.
-    */
-    public abstract void draw(Graphics2D g);
+	 */
+	public abstract void draw(Graphics2D g);
 	public void drawPause(Graphics2D g) {
 		AttributedString styledText1 = null;
+		if(hasDied) {
+			AttributedString styledText = new AttributedString("YOU DIED !!");
+	        styledText.addAttribute(TextAttribute.FAMILY, "serif");
+	        styledText.addAttribute(TextAttribute.SIZE, 100);
+	        styledText.addAttribute(TextAttribute.FOREGROUND, Color.red);        
+	        AttributedCharacterIterator i = styledText.getIterator();
+	        g.drawString(i, 100.0f,200.0f);
 	        
 	        styledText1 = new AttributedString("Press ESC to Restart the Game");
+		}
+		else styledText1 = new AttributedString("Press ESC to return to the Game");
 		
         styledText1.addAttribute(TextAttribute.FAMILY, "serif");
         styledText1.addAttribute(TextAttribute.SIZE, 50);

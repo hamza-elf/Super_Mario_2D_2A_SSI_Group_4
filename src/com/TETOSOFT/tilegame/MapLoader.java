@@ -88,7 +88,19 @@ public class MapLoader
         return newImage;
     }
 
-
+    public TileMap loadFirstMap() {
+    	TileMap map = null;
+    	while (map == null) {
+    		try {
+    			currentMap =1 ;
+    			map = loadMap("maps/map1.txt");
+    		}
+    		catch (IOException ex) {
+    			System.err.println(ex);
+    		}
+    	}
+    	return map;
+    }
     public TileMap loadNextMap() 
     {
         TileMap map = null;

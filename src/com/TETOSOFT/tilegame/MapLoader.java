@@ -253,7 +253,12 @@ public class MapLoader
 
         // load left-facing images
         images[0] = new Image[] {
-            loadImage("player.png"),         
+            loadImage("player1.png"),        
+            loadImage("player2.png"),   
+            loadImage("player3.png"),  
+            loadImage("player4.png"),  
+            loadImage("player5.png"),  
+            loadImage("player6.png"),  
             loadImage("fly1.png"),
             loadImage("fly2.png"),
             loadImage("fly3.png"),
@@ -282,9 +287,9 @@ public class MapLoader
         
         for (int i=0; i<4; i++) 
         {
-            playerAnim[i] = createPlayerAnim (images[i][0]);
-            flyAnim[i] = createFlyAnim (images[i][1], images[i][1], images[i][3]);
-            grubAnim[i] = createGrubAnim (images[i][4], images[i][5]);
+            playerAnim[i] = createPlayerAnim (images[i][0],images[i][1],images[i][2],images[i][3],images[i][4],images[i][5]);
+            flyAnim[i] = createFlyAnim (images[i][6], images[i][7], images[i][8]);
+            grubAnim[i] = createGrubAnim (images[i][9], images[i][10]);
         }
 
         // create creature sprites
@@ -294,11 +299,16 @@ public class MapLoader
     }
 
 
-    private Animation createPlayerAnim(Image player)
+    private Animation createPlayerAnim(Image player1,Image player2,Image player3,Image player4,Image player5,Image player6)
     {
         Animation anim = new Animation();
-        anim.addFrame(player, 250);
-     
+        anim.addFrame(player1, 50);
+        anim.addFrame(player2, 50);
+        anim.addFrame(player3, 50);
+        anim.addFrame(player4, 50);
+        anim.addFrame(player5, 50);
+        anim.addFrame(player6, 50);
+        
         return anim;
     }
 
@@ -337,6 +347,9 @@ public class MapLoader
         anim.addFrame(loadImage("coin3.png"),250);
         anim.addFrame(loadImage("coin4.png"),250);
         anim.addFrame(loadImage("coin5.png"),250);
+        anim.addFrame(loadImage("coin6.png"),250);
+        anim.addFrame(loadImage("coin7.png"),250);
+        anim.addFrame(loadImage("coin8.png"),250);
         coinSprite = new PowerUp.Star(anim);
 
         // create "music" sprite
@@ -344,7 +357,7 @@ public class MapLoader
         anim.addFrame(loadImage("music1.png"), 150);
         anim.addFrame(loadImage("music2.png"), 150);
         anim.addFrame(loadImage("music3.png"), 150);
-        anim.addFrame(loadImage("music2.png"), 150);
+        anim.addFrame(loadImage("music4.png"), 150);
         musicSprite = new PowerUp.Music(anim);
         musicSprite=new PowerUp.Music(anim);
     }

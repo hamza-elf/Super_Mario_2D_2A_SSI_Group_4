@@ -13,8 +13,9 @@ public class ScreenManager
    
     public ScreenManager() 
     {
-        GraphicsEnvironment environment = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        device = environment.getDefaultScreenDevice();
+//        GraphicsEnvironment environment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+//        device = environment.getDefaultScreenDevice();
+    	frame = new JFrame("2A SSI Groupe 4 : SUPER MARIO GAME");
     }
 
 

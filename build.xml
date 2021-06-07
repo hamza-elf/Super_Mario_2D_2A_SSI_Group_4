@@ -38,7 +38,7 @@
     </target>
 
     <target name="run">
-        <java jar="build/SuperMario2D.jar" fork="true"/>
+        <java jar="build/Gamejar.jar" fork="true"/>
     </target>
 
 

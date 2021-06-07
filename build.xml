@@ -3,11 +3,8 @@
 <project name="SuperMario2D" default="compile" basedir=".">
     <description>Builds, tests, and runs the project SuperMario2D.</description>
 
-    <target name="init">
-        <property file="ant-build.properties"/>
-    </target>
-
-    <target name="clean" depends="init">
+    
+    <target name="clean" >
         <delete dir="compile"/>
     </target>
 

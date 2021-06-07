@@ -42,7 +42,7 @@
     </target>
 
 
-    <target name="test-compile" depends="compile">
+    <target name="test-de-compilation" depends="compile">
         <mkdir dir="build/tests"/>
         <javac includeantruntime="false" srcdir="build/classes/com/TETOSOFT/test" destdir="build/tests" classpath="${junit_path}"/>
     </target>

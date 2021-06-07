@@ -47,7 +47,7 @@
         <javac includeantruntime="false" srcdir="build/classes/com/TETOSOFT/test" destdir="build/tests" classpath="${junit_path}"/>
     </target>
 
-    <target name="unit-tests" depends="test-compile">
+    <target name="tests-unitaires" depends="test-compile">
         <mkdir dir="build/reports"/>
         <junit printsummary="yes" haltonfailure="no">
             <classpath>

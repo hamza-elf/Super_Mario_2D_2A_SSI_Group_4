@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Testing phase') {
             steps {
-                bat 'ant unit-tests'
+                bat 'ant tests-unitaires'
             }
         }
         stage('Packaging phase') {

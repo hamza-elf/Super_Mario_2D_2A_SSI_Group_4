@@ -1,6 +1,6 @@
 # My Super Mario Java 2D Game
 
-# Nouvellesfonctionnalités ajoutées,  en l’occurrence: 
+# Nouvelles fonctionnalités ajoutées,  en l’occurrence: 
 
 -l’ajout du menue « pause » au click de la touche “échappe” 
 

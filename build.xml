@@ -3,59 +3,56 @@
 <project name="SuperMario2D" default="compile" basedir=".">
     <description>Builds, tests, and runs the project SuperMario2D.</description>
 
-    <target name="init">
-        <property file="ant-build.properties"/>
-    </target>
-
-    <target name="clean" depends="init">
-        <delete dir="build"/>
+    
+    <target name="clean" >
+        <delete dir="compile"/>
     </target>
 
     <target name="compile" depends="clean">
-        <mkdir dir="build/classes"/>
-        <javac includeantruntime="false" srcdir="src" destdir="build/classes"/>
+        <mkdir dir="compile/classes"/>
+        <javac includeantruntime="false" srcdir="src" destdir="compile/classes"/>
     </target>
 
 
-    <target name="copy-media">
-        <copy todir="Export/images">
+    <target name="exporting-files">
+        <copy todir="Exported/images">
             <fileset dir="images" includes="**"/>
         </copy>
-        <copy todir="Export/maps">
+        <copy todir="Exported/maps">
             <fileset dir="maps" includes="**"/>
         </copy>
-        <copy todir="Export/sounds">
+        <copy todir="Exported/sounds">
             <fileset dir="sounds" includes="**"/>
         </copy>
     </target>
-    <target name="package" depends="compile,copy-media">
-        <mkdir dir="Export"/>
-        <jar jarfile="Export/SuperMario2D.jar" basedir="build/classes">
+    <target name="package" depends="compile,exporting-files">
+        <mkdir dir="Exported"/>
+        <jar jarfile="Export/Gamejar.jar" basedir="compile/classes">
             <manifest>
                 <attribute name="Main-Class" value="com.TETOSOFT.tilegame.GameEngine"/>
             </manifest>
         </jar>
     </target>
 
-    <target name="run">
-        <java jar="build/SuperMario2D.jar" fork="true"/>
+    <target name="run-game">
+        <java jar="build/Gamejar.jar" fork="true"/>
     </target>
 
 
-    <target name="test-compile" depends="compile">
-        <mkdir dir="build/tests"/>
-        <javac includeantruntime="false" srcdir="build/classes/com/TETOSOFT/test" destdir="build/tests" classpath="${junit_path}"/>
+    <target name="test-de-compilation" depends="compile">
+        <mkdir dir="compile/tests"/>
+        <javac includeantruntime="false" srcdir="compile/classes/com/TETOSOFT/test" destdir="compile/tests" classpath="${junit_path}"/>
     </target>
 
-    <target name="unit-tests" depends="test-compile">
-        <mkdir dir="build/reports"/>
+    <target name="tests-unitaires" depends="test-de-compilation">
+        <mkdir dir="compile/test-results"/>
         <junit printsummary="yes" haltonfailure="no">
             <classpath>
                 <pathelement path="${junit_path}"/>
-                <pathelement path="build/tests"/>
+                <pathelement path="compile/test-results"/>
             </classpath>
             <formatter type="plain"/>
-            <batchtest fork="yes" todir="build/reports">
+            <batchtest fork="yes" todir="compile/test-results">
                 <fileset dir="test">
                     <include name="**/*Test*.java"/>
                 </fileset>

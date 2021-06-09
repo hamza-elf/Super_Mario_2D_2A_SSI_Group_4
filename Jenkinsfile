@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Packaging phase') {
             steps {
-                bat 'ant packages'
+                bat 'ant package'
             }
         }
     }
